@@ -1,0 +1,14 @@
+
+.image{
+    height: 200px;
+    width: 200px;
+}
+.cont{
+    border: 2px solid gray;
+    /* padding: 0px 100px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0px;
+}
