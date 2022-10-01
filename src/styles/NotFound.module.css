@@ -1,8 +1,9 @@
-.mainContainer {
+
+.containerr{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 150px;
+  transform: translateY(200px);
 }
 .textContainer {
   margin-left: 30px;
@@ -10,4 +11,10 @@
 .notfoundSvg {
   width: 300px;
   height: 300px;
+}
+@media (min-width: 1000px){
+  .notfoundSvg {
+    width: 500px;
+    height: 500px;
+  }
 }

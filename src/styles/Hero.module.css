@@ -1,9 +1,8 @@
-.container {
-  position: relative;
-}
 .backGround {
-  /* width: 100vw; */
-  height: 84vh;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  height: 100vh;
   width: 100vw;
 }
 .backText {
@@ -11,6 +10,124 @@
   top: 30%;
   left: 3.5%;
 }
+.listContainer {
+  display: none;
+}
 .btnLink {
   text-decoration: none;
+}
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  z-index: 100;
+  position: absolute;
+  right: 2%;
+  top: 2%;
+}
+.listChild {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 600;
+}
+.linkList {
+  color: rgb(24, 21, 21);
+  text-decoration: none;
+}
+
+.signItem {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 600;
+  background-color: rgba(238, 17, 17, 0.805);
+  padding: 10px;
+  border-radius: 25px;
+  color: white;
+}
+.signItem:hover {
+  transform: scale(1.15);
+  transition: all 0.1s ease-in-out;
+  color: rgb(14, 15, 15);
+}
+.listChild:hover {
+  transform: scale(1.15);
+  transition: all 0.1s ease-in-out;
+  color: rgb(186, 189, 189);
+}
+.burgerIcon {
+  display: block;
+  position: absolute;
+  z-index: 100;
+  right: 2%;
+  top: 0.5%;
+}
+.menuList {
+  margin-top: 20px;
+  margin-left: 17px;
+  list-style-type: none;
+}
+.itemMenu {
+  font-weight: 500;
+  font-family: "Montserrat";
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+.hMenuLi {
+  text-decoration: none;
+  margin-bottom: 25px;
+  color: #0b0a0a;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.mainCont {
+  position: absolute;
+  top: 0%;
+  z-index: 90;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+.navText {
+  position: absolute;
+  left: 3%;
+  top: 2%;
+  text-decoration: none;
+  color: rgb(2, 2, 2);
+}
+
+@media (min-width: 750px) {
+  .burgerIcon {
+    display: none;
+  }
+  .listContainer {
+    display: flex;
+  }
+}
+@media (min-width: 1000px) {
+  .listChild {
+    font-size: 21px;
+  }
+  .linkList:last-child {
+    font-size: 22px;
+  }
+  .backText {
+    position: absolute;
+    top: 30%;
+    left: 7.5%;
+  }
+}
+@media (min-width: 1200px) {
+  .listChild {
+    font-size: 25px;
+  }
+  .linkList:last-child {
+    font-size: 27px;
+  }
 }

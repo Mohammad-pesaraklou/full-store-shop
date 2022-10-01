@@ -1,30 +1,25 @@
 .container {
-  width: calc(100vw - 18px);
-  height: 120px;
   background-color: #313f7f;
-  position: absolute;
-  bottom: 0%;
-  left: 0;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 20px;
+  /* position: absolute;
+  bottom: 0%; */
 }
-
-.iconContainer {
+.iconContainer{
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
-  /* padding: 10px; */
+  margin-bottom: 20px;
 }
-.links {
-  text-decoration: none;
+.links{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+  text-decoration: none;
 }
-.copyContainer {
+.copyContainer{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
 }
+

@@ -1,41 +1,40 @@
-import { Button, CircularProgress, Container, Grid, LinearProgress, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchProduct } from '../Redux/Product/ProductContext';
-///function
+import { Button, Container, Grid, Typography } from '@mui/material';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { shorten } from '../helper/functions';
+import { BiChevronLeft } from 'react-icons/bi'
 //styles
 import styles from '../styles/Product.module.css'
-import Search from './Search';
-import { BiChevronLeft } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
+const SearchedItem = () => {
 
-
-const Products = () => {
-
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.productState)
+    const [searchedItems, setSearchedItem] = useState([])
+    const params = useParams()
     const navigate = useNavigate()
 
+    console.log(params);
+
+    const getProducts = (category) => {
+        axios.get(`https://fakestoreapi.com/products/category/${category}`)
+            .then(res => setSearchedItem(res.data))
+
+    }
 
     useEffect(() => {
-        if (!data.length) dispatch(fetchProduct())
+        getProducts(params.search)
     }, [])
 
-    console.log(data);
-
-    if (!data.products) return <LinearProgress color="info" sx={{ transform: 'translateY(10px)' }} />
+    if(!searchedItems.length) return navigate('/notfound')
 
     return (
-        <div className={styles.mainContainer}>
+        <>
             <Container>
-                <Search />
                 <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
-                <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products</Typography>
+                <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products<span style={{ color: '#e30c222' }}>({params.search})</span></Typography>
                 <Grid container spacing={2} >
                     {
-                        data.products?.map(product => {
+                        searchedItems?.map(product => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} p={2} key={product.id} >
                                     <div className={styles.cont}>
@@ -57,11 +56,11 @@ const Products = () => {
                         })
                     }
                 </Grid>
+
             </Container>
             <Footer />
-
-        </div>
+        </>
     );
 };
 
-export default Products;
+export default SearchedItem;

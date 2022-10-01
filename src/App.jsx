@@ -3,13 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Navigate } from "react-router-dom";
 //components
-import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import Products from "./components/Products";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
+import SearchedItem from "./components/SearchedItem";
 
 const theme = createTheme({
   palette: {
@@ -25,21 +25,20 @@ function App() {
       style={{
         background: "#c1c1c1",
         minHeight: "100vh",
-        position: 'relative'
+        position: "relative",
       }}
     >
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Navbar />
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/searched/:search" element={<SearchedItem />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="/*" element={<Navigate to="/notfound" />} />
           </Routes>
         </Provider>
       </ThemeProvider>
-      <Footer />
     </div>
   );
 }
