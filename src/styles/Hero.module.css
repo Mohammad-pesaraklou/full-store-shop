@@ -1,15 +1,16 @@
-.container{
-    position: relative;
+.container {
+  position: relative;
 }
-.backGround{
-    height: 93vh;
-    width: calc(100vw - 18px);
+.backGround {
+  /* width: 100vw; */
+  height: 84vh;
+  width: 100vw;
 }
-.backText{
-position: absolute;
-top: 30%;
-left: 3.5%;
+.backText {
+  position: absolute;
+  top: 30%;
+  left: 3.5%;
 }
-.btnLink{
-    text-decoration: none;
+.btnLink {
+  text-decoration: none;
 }

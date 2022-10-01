@@ -1,0 +1,13 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 150px;
+}
+.textContainer {
+  margin-left: 30px;
+}
+.notfoundSvg {
+  width: 300px;
+  height: 300px;
+}

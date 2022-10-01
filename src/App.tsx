@@ -8,8 +8,8 @@ import Hero from "./components/Hero";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import Products from "./components/Products";
-import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +25,7 @@ function App() {
       style={{
         background: "#c1c1c1",
         minHeight: "100vh",
-        position: "relative",
+        position: 'relative'
       }}
     >
       <ThemeProvider theme={theme}>
@@ -34,12 +34,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/notfound" element={<NotFound />}/>
-            <Route path="/*" element={<Navigate to='/notfound'/>}/>
+            <Route path="/notfound" element={<NotFound />} />
+            <Route path="/*" element={<Navigate to="/notfound" />} />
           </Routes>
-          <Footer />
         </Provider>
       </ThemeProvider>
+      <Footer />
     </div>
   );
 }

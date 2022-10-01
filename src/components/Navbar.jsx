@@ -3,22 +3,17 @@ import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
-//sttyles
+import { AiOutlineHome } from 'react-icons/ai'
+import { MdOutlineAccountCircle } from 'react-icons/md'
+import { MdOutlineLocalGroceryStore } from 'react-icons/md'
+import { FcAbout } from 'react-icons/fc'
+//styles
 import styles from '../styles/Navbar.module.css'
 import { Link } from "react-router-dom";
-
-const drawerWidth = 240;
 
 
 
@@ -27,6 +22,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState();
   const [open, setOpen] = useState();
 
+  const drawerWidth = 240;
 
   const handler = () => {
     setToggle(!toggle)
@@ -41,7 +37,9 @@ const Navbar = () => {
       <AppBar position="sticky">
         <Toolbar className={styles.Container} sx={{ p: 3 }}>
           <Typography variant='h5' fontFamily={'Montserrat'}>
-            Online store
+            <Link className={styles.navText} to='/'>
+              Online store
+            </Link>
           </Typography>
           <Box>
             <GiHamburgerMenu
@@ -64,7 +62,7 @@ const Navbar = () => {
               <Link className={styles.linkList} to={'/about'}>
                 <li className={styles.listChild}>About</li>
               </Link>
-              <Link className={styles.linkList}  to={'/signUp'}>
+              <Link className={styles.linkList} to={'/signUp'}>
                 <li className={styles.listChild}>Sign Up</li>
               </Link>
             </ul>
@@ -89,13 +87,33 @@ const Navbar = () => {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <Typography variant="h5" p={"5px 15px"} sx={{}}>
+          <Typography variant="h5" fontWeight={600} p={"5px 15px"} sx={{ p: 2 }}>
             Menu
           </Typography>
-
+          <Box>
+            <ul className={styles.menuList}>
+              <Link className={styles.hMenuLi} to="/">
+                  <AiOutlineHome fontSize='22px'/>
+                  <li className={styles.itemMenu}>Home</li>
+              </Link>
+              <Link className={styles.hMenuLi} to="/account">
+                <MdOutlineAccountCircle fontSize='22px'/>
+                <li className={styles.itemMenu}>Account</li>
+              </Link>
+              <Link className={styles.hMenuLi} to="/products">
+              <MdOutlineLocalGroceryStore fontSize='22px'/>
+                <li className={styles.itemMenu}>Products</li>
+              </Link>
+              <Link className={styles.hMenuLi} to="/aboutUs">
+              <FcAbout fontSize='22px'/>
+                <li className={styles.itemMenu}>About Us</li>
+              </Link>
+            </ul>
+          </Box>
 
         </Drawer>
       </AppBar>
+
     </div>
   );
 };
