@@ -23,7 +23,7 @@ const SearchedItem = () => {
 
     useEffect(() => {
         getProducts(params.search)
-    }, [])
+    }, [params.search])
 
     if(!searchedItems.length) return navigate('/notfound')
 

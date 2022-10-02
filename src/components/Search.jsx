@@ -26,7 +26,7 @@ const Search = () => {
                             variant='filled'
                             type="text"
                             value={search}
-                            sx={{ display: 'flex', justifyContent: "center", fontSize: 17, marginTop: '40px' }}
+                            sx={{ display: 'flex', justifyContent: "center", fontSize: 17, marginTop: '150px', }}
                             onChange={event => setSearch(event.target.value)}
                         />
                     </form>

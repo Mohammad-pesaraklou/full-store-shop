@@ -10,6 +10,8 @@ import Products from "./components/Products";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
 import SearchedItem from "./components/SearchedItem";
+import DetailsPage from "./components/DetailsPage";
+import Store from "./components/Store";
 
 const theme = createTheme({
   palette: {
@@ -31,10 +33,12 @@ function App() {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/searched/:search" element={<SearchedItem />} />
+            <Route path="/store" element={<Store />}/>
             <Route path="/notfound" element={<NotFound />} />
+            <Route path="/searched/:search" element={<SearchedItem />} />
+            <Route path="products/:id" element={<DetailsPage />}/>
+            <Route path="/products" element={<Products />} />
+            <Route path="/" element={<Hero />} />
             <Route path="/*" element={<Navigate to="/notfound" />} />
           </Routes>
         </Provider>

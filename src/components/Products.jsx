@@ -1,21 +1,25 @@
 import { Button, CircularProgress, Container, Grid, LinearProgress, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchProduct } from '../Redux/Product/ProductContext';
+import { fetchProduct } from '../Redux/Product/ProductAction';
 ///function
-import { shorten } from '../helper/functions';
+import { isInCart, quantityCount, shorten } from '../helper/functions';
 //styles
-import styles from '../styles/Product.module.css'
+import styles from '../styles/Products.module.css'
 import Search from './Search';
 import { BiChevronLeft } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
+import Navbar from './Navbar';
+import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
+import trashIcon from '../Assets/trash.svg';
 
 
 const Products = () => {
 
     const dispatch = useDispatch()
     const data = useSelector(state => state.productState)
+    const items = useSelector(state => state.cartState)
     const navigate = useNavigate()
 
 
@@ -23,12 +27,12 @@ const Products = () => {
         if (!data.length) dispatch(fetchProduct())
     }, [])
 
-    console.log(data);
 
     if (!data.products) return <LinearProgress color="info" sx={{ transform: 'translateY(10px)' }} />
 
     return (
         <div className={styles.mainContainer}>
+            <Navbar />
             <Container>
                 <Search />
                 <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
@@ -37,22 +41,33 @@ const Products = () => {
                     {
                         data.products?.map(product => {
                             return (
-                                <Grid item xs={12} sm={6} md={4} p={2} key={product.id} >
-                                    <div className={styles.cont}>
-                                        <img src={product.image} className={styles.image} />
-                                        <div className={styles.detailsCont}>
-                                            <Typography className={styles.title} variant='h5' fontWeight={600} color={'#212121'} m={4}>
-                                                {shorten(product?.title)}
-                                            </Typography>
-                                            <p className={styles.price}>
-                                                $ {product?.price}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <Button variant='contained' sx={{ mb: 2, fontFamily: 'Montserrat' }}>Add Item</Button>
+                                <div className={styles.container}>
+                                    <img src={product.image} className={styles.cardImage} />
+                                    <h3>{shorten(product.title)}</h3>
+                                    <p>{product.price} $</p>
+                                    <div className={styles.linkContainer}>
+                                        <Link to={`/products/${product.id}`}>DetailsPage</Link>
+                                        <div className={styles.buttonContainer}>
+                                            {quantityCount(items, product.id) === 1 &&
+                                                <button className={styles.smallButton} onClick={() => dispatch(removeItem(product))}><img src={trashIcon} alt="trash" /></button>
+                                            }
+                                            {
+                                                quantityCount(items, product.id) > 1 && <button className={styles.smallButton} onClick={() => dispatch(decrease(product))}>-</button>
+                                            }
+                                            {
+                                                quantityCount(items, product.id) > 0 &&
+                                                <span className={styles.counter}>{quantityCount(items, product.id)}</span>
+                                            }
+
+
+                                            {
+                                                isInCart(items, product.id) ?
+                                                    <button className={styles.smallButton} onClick={() => dispatch(increase(product))}>+</button> :
+                                                    <button onClick={() => dispatch(addItem(product))}>ADD_ITEM</button>
+                                            }
                                         </div>
                                     </div>
-                                </Grid>
+                                </div>
                             )
                         })
                     }
