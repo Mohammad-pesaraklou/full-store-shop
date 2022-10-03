@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <div >
-            <AppBar >
+            <AppBar position='sticky' sx={{mb: 4}}>
                 <Toolbar className={styles.container}>
                     <Link style={{ color: 'white', textDecoration: 'none' }} to='/'>
                         <Typography variant="h5" fontFamily={'Montserrat'}>

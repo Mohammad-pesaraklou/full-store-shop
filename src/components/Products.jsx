@@ -20,6 +20,7 @@ const Products = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.productState)
     const items = useSelector(state => state.cartState)
+    console.log(items);
     const navigate = useNavigate()
 
 
@@ -37,11 +38,11 @@ const Products = () => {
                 <Search />
                 <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
                 <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products</Typography>
-                <Grid container spacing={2} >
+                <Grid container sx={{pl: 4.4}}>
                     {
                         data.products?.map(product => {
                             return (
-                                <div className={styles.container}>
+                                <div className={styles.container} key={product.id}>
                                     <img src={product.image} className={styles.cardImage} />
                                     <h3>{shorten(product.title)}</h3>
                                     <p>{product.price} $</p>
