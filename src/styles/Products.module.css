@@ -8,6 +8,20 @@
   transition: all 0.2s ease;
   text-align: center;
 }
+.cont {
+  border-radius: 10px;
+  background: #e0e0e064;
+  box-shadow: 20px 20px 60px #848383, -20px -20px 60px #c7c7c7;
+  width: 550px;
+  overflow: hidden;
+  margin: 0 10px 50px;
+  transition: all 0.2s ease;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .container:hover {
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
@@ -21,21 +35,27 @@
   margin: 10px;
 }
 
-.container h3 {
+.cont h3 {
   color: #404040;
   text-align: left;
   margin: 25px 20px 15px;
   font-size: 1.1rem;
 }
 
-.container p {
+.payment p {
   color: #404040;
-  text-align: left;
+  text-align: center;
   margin: 15px 20px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
 }
-
+.cont span {
+  color: #212112;
+  text-align: center;
+  margin: 15px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}
 .linkContainer {
   display: flex;
   justify-content: space-between;
@@ -48,7 +68,16 @@
   color: #1a73e8;
   font-size: 0.95rem;
 }
-
+.buttonContainer {
+  display: flex;
+  margin: 10px 0px;
+}
+.bigContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
 .buttonContainer button {
   font-size: 0.9rem;
   background-color: #1a73e8;
@@ -63,7 +92,9 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin-left: 5px;
 }
-
+.complete div {
+  padding-top: 10px;
+}
 .smallButton {
   width: 30px !important;
   font-size: 1.6rem !important;

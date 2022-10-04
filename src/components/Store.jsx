@@ -1,25 +1,32 @@
-import { Box, Container, LinearProgress, Table, TableBody, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, Container, LinearProgress, Table, TableBody, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TableCell } from '@mui/material';
 import trashIcon from '../Assets/trash.svg'
+import { Link, useNavigate } from 'react-router-dom';
+// picture
+import pic from '../Assets/success.png';
+//function
+import { quantityCount, shorten } from '../helper/functions';
 //components
 import Navbar from './Navbar';
-import { quantityCount, shorten } from '../helper/functions';
+//styles
 import styles from '../styles/Products.module.css'
+//actions
 import { decrease, increase, removeItem } from '../Redux/cart/CartAction';
-import { Link } from 'react-router-dom';
+import { BiChevronLeft } from 'react-icons/bi';
 
 const Store = () => {
 
     const items = useSelector(state => state.cartState)
     const dispatch = useDispatch();
-    console.log(items);
+    const navigate = useNavigate();
 
     return (
         <div>
             <Navbar />
             <Container>
+                <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
                 <Typography variant={'h4'} sx={{ display: 'flex', justifyContent: 'center', margin: '30px 0px', fontFamily: 'Montserrat' }}>
                     Your Store Shop
                 </Typography>
@@ -30,7 +37,7 @@ const Store = () => {
                                 <TableHead sx={{ backgroundColor: "#EEBC1D" }}>
                                     <TableRow>
                                         {
-                                            ["Product", "Price", "Quantity", "Total"].map(item => (
+                                            ["Product", "Price", "Quantity"].map(item => (
                                                 <TableCell
                                                     sx={{ color: "black", fontWeight: 700, fontFamily: 'Montserrat' }}
                                                     key={item}
@@ -44,7 +51,6 @@ const Store = () => {
                                 <TableBody>
                                     {
                                         items.selectedItems?.map(item => {
-                                            console.log(item)
                                             return (
                                                 <TableRow
                                                     className='row'
@@ -75,7 +81,7 @@ const Store = () => {
 
                                                         </div>
                                                     </TableCell>
-                                                    <TableCell align='left'>
+                                                    <TableCell align='left' sx={{ fontWeight: '600' }}>
                                                         $ {item?.price}
                                                     </TableCell>
                                                     <TableCell align='left' >
@@ -93,14 +99,6 @@ const Store = () => {
                                                             <button className={styles.smallButton} onClick={() => dispatch(increase(item))}>+</button>
                                                         </Box>
                                                     </TableCell>
-                                                    <TableCell
-                                                        align='left'
-                                                        sx={{
-                                                            fontWeight: 500,
-                                                        }}
-                                                    >
-                                                        total
-                                                    </TableCell>
                                                 </TableRow>
                                             )
                                         })
@@ -110,31 +108,37 @@ const Store = () => {
                         )
                     }
                 </TableContainer>
-                <div>
-                    {
-                    items.itemsCounter === 0 && <div className={styles.payment}>
-                        <p><span>Total Items:</span>{items.counterItem}</p>
-                        <p><span>Total payment:</span>{items.total}</p>
-                        <div className={styles.buttonContainer}>
-                            <button className={styles.checkout} onClick={() => dispatch({ type: "CHECKOUT" })}>Check Out</button>
-                            <button className={styles.clear} onClick={() => dispatch({ type: "CLEAR" })}>Clear</button>
-                        </div>
+                <div className={styles.bigContainer}>
+                    <div className={styles.cont}>
+                        {
+                            items.itemsCounter > 0 && <div className={styles.payment}>
+                                <p><span>Total Items:</span>{items.itemsCounter}</p>
+                                <p><span>Total payment:</span>{items.total}</p>
+                                <div className={styles.buttonContainer}>
+                                    <button className={styles.checkout} onClick={() => dispatch({ type: "CHECKOUT" })}>Check Out</button>
+                                    <button className={styles.clear} onClick={() => dispatch({ type: "CLEAR" })}>Clear</button>
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            items.checkOut && <div className={styles.complete} >
+                                <img src={pic} alt='successfully'/>
+                                <h3>Thank You For Your Purchase</h3>
+                                <Link to='/products' style={{ textDecoration: 'none', color: '#1a73e8', }}><Button variant='contained' sx={{ fontFamily: 'Montserrat', mt: 1 }}>Continue Shopping</Button></Link>
+                            </div>
+                        }
+
+                        {
+                            !items.checkOut && items.itemsCounter === 0 && <div className={styles.complete}>
+                                <h3>Want to buy?</h3>
+                                <div>
+                                    <Link to='/products' style={{ textDecoration: 'none', color: '#1a73e8', }}>Products</Link>
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
-
-                    {
-                        items.checkout && <div className={styles.complete}>
-                            <h3>checkout successfully</h3>
-                            <Link to='/products'>Products</Link>
-                        </div>
-                    }
-
-                    {
-                        !items.checkout && items.counterItem === 0 && <div className={styles.complete}>
-                            <h3>Want to buy?</h3>
-                            <Link to='/products'>Products</Link>
-                        </div>
-                    }</div>
+                </div>
             </Container>
         </div>
     );

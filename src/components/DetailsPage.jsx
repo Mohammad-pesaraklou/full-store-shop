@@ -22,7 +22,6 @@ const DetailsPage = () => {
     }
     useEffect(() => {
         getProductsById(params.id)
-        console.log(products);
     }, [params.id])
 
 

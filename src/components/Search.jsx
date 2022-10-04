@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Grid, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
 const Search = () => {
 
     const [search, setSearch] = useState()

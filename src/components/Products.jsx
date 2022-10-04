@@ -20,7 +20,6 @@ const Products = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.productState)
     const items = useSelector(state => state.cartState)
-    console.log(items);
     const navigate = useNavigate()
 
 
