@@ -12,6 +12,9 @@ import Footer from "./components/Footer";
 import SearchedItem from "./components/SearchedItem";
 import DetailsPage from "./components/DetailsPage";
 import Store from "./components/Store";
+import AuthContextProvider from "./context/AuthContextProvider";
+import SignUp from "./Authintication/SignUp";
+import SignIn from "./Authintication/SignIn";
 
 const theme = createTheme({
   palette: {
@@ -30,19 +33,23 @@ function App() {
         position: "relative",
       }}
     >
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/store" element={<Store />}/>
-            <Route path="/notfound" element={<NotFound />} />
-            <Route path="/searched/:search" element={<SearchedItem />} />
-            <Route path="products/:id" element={<DetailsPage />}/>
-            <Route path="/products" element={<Products />} />
-            <Route path="/" element={<Hero />} />
-            <Route path="/*" element={<Navigate to="/notfound" />} />
-          </Routes>
-        </Provider>
-      </ThemeProvider>
+      <AuthContextProvider>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <Routes>
+              <Route path="/notfound" element={<NotFound />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/searched/:search" element={<SearchedItem />} />
+              <Route path="products/:id" element={<DetailsPage />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/" element={<Hero />} />
+              <Route path="/*" element={<Navigate to="/notfound" />} />
+            </Routes>
+          </Provider>
+        </ThemeProvider>
+      </AuthContextProvider>
     </div>
   );
 }

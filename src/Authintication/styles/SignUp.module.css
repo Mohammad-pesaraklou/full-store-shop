@@ -1,0 +1,134 @@
+.mainCont{
+    position: relative;
+    width: 100vw;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato';
+}
+.imgN{
+    width: 100vw;
+    height: 100vh;
+}
+.overlay{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background: rgb(14, 14, 14, 0.50);
+    width: 100vw;
+    height: 100vh;
+}
+.fromContainer{
+    position: absolute;
+    top: 15%;
+    width: 550px;
+    height: 600px;
+    padding: 30px 40px;
+    background-color: #0b0a0aba;
+    border-radius: 7px;
+    z-index: 222;
+}
+.filed{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.policyText{
+    font-size: 13px;
+}
+.filed label{
+    padding: 10px 0;
+    color: #d9d9deef;
+    font-weight: 600;
+    font-family: 'Lato', Helvetica, sans-serif;
+}
+
+.filed input{
+    height: 45px;
+    border: 1px solid darkgrey;
+    border-radius: 6px;
+    background-color: rgba(125, 122, 118, 0.87);
+    outline: none;
+    padding: 6px 10px;
+  font-size: 15px;
+}
+.completed:focus{
+    border: 2px solid #20a744eb;
+}
+.unCompleted:focus{
+    border: 2px solid #c2210ceb;  
+}
+.filed span {
+    background-color: rgba(190, 32, 32, 0.782);
+    color: rgba(240, 248, 255, 0.714);
+    width: 110px;
+    padding: 2px;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+.header{
+    color: rgb(240, 230, 230);
+    font-size: 37px;
+    
+}
+.btns{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Lato';
+}
+.btns button {
+    width: 285px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e50914b7;
+    color: rgba(240, 248, 255, 0.861);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.btns a{
+    text-decoration: none;
+    color: #d02a18;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+.logText{
+    color: darkgrey;
+    font-size: 15px;
+}
+.logText span{
+    color: #d02a18;
+    font-size: 18px;
+}
+.errMsg{
+    padding-top: 18px;
+    color: rgb(153, 5, 5);
+}
+
+
+@media (max-width: 620px){
+    .fromContainer{
+        width: 420px;
+        height: 520px;
+    }
+}
+@media (max-width:450px){
+    .fromContainer{
+        width: 340px;
+        height: 520px;
+    }
+}
+@media (max-width:390px){
+    .fromContainer{
+        width: 300px;
+        height: 520px;
+    }
+}

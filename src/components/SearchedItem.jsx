@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, LinearProgress, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
@@ -14,7 +14,7 @@ import Navbar from './Navbar';
 import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
 import { useDispatch, useSelector } from 'react-redux';
 const SearchedItem = () => {
-    
+
     const items = useSelector(state => state.cartState)
     const dispatch = useDispatch()
     const [searchedItems, setSearchedItem] = useState([])
@@ -29,6 +29,7 @@ const SearchedItem = () => {
 
     useEffect(() => {
         getProducts(params.search)
+       
     }, [])
 
     if (!searchedItems.length) return navigate('/notfound')
@@ -39,37 +40,37 @@ const SearchedItem = () => {
             <Container>
                 <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
                 <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products<span style={{ color: '#e30c222' }}>({params.search})</span></Typography>
-                <Grid container spacing={2} >
+                <Grid container sx={{ pl: { xs: 8, sm: 6 } }} >
                     {
                         searchedItems?.map(product => {
                             return (
-                                    <div className={styles.container} key={product.id}>
-                                        <img src={product.image} className={styles.cardImage} />
-                                        <h3>{shorten(product.title)}</h3>
-                                        <p>{product.price} $</p>
-                                        <div className={styles.linkContainer}>
-                                            <Link to={`/products/${product.id}`}>DetailsPage</Link>
-                                            <div className={styles.buttonContainer}>
-                                                {quantityCount(items, items.id) === 1 &&
-                                                    <button className={styles.smallButton} onClick={() => dispatch(removeItem(items))}><img src={trashIcon} alt="trash" /></button>
-                                                }
-                                                {
-                                                    quantityCount(items, items.id) > 1 && <button className={styles.smallButton} onClick={() => dispatch(decrease(items))}>-</button>
-                                                }
-                                                {
-                                                    quantityCount(items, items.id) > 0 &&
-                                                    <span className={styles.counter}>{quantityCount(items, items.id)}</span>
-                                                }
+                                <div className={styles.container}>
+                                    <img src={product.image} className={styles.cardImage} />
+                                    <h3>{shorten(product.title)}</h3>
+                                    <p>{product.price} $</p>
+                                    <div className={styles.linkContainer}>
+                                        <Link to={`/products/${product.id}`}>DetailsPage</Link>
+                                        <div className={styles.buttonContainer}>
+                                            {quantityCount(items, product.id) === 1 &&
+                                                <button className={styles.smallButton} onClick={() => dispatch(removeItem(product))}><img src={trashIcon} alt="trash" /></button>
+                                            }
+                                            {
+                                                quantityCount(items, product.id) > 1 && <button className={styles.smallButton} onClick={() => dispatch(decrease(product))}>-</button>
+                                            }
+                                            {
+                                                quantityCount(items, product.id) > 0 &&
+                                                <span className={styles.counter}>{quantityCount(items, product.id)}</span>
+                                            }
 
 
-                                                {
-                                                    isInCart(items, items.id) ?
-                                                        <button className={styles.smallButton} onClick={() => dispatch(increase(items))}>+</button> :
-                                                        <button onClick={() => dispatch(addItem(items))}>ADD_ITEM</button>
-                                                }
-                                            </div>
+                                            {
+                                                isInCart(items, product.id) ?
+                                                    <button className={styles.smallButton} onClick={() => dispatch(increase(product))}>+</button> :
+                                                    <button onClick={() => dispatch(addItem(product))}>ADD_ITEM</button>
+                                            }
                                         </div>
                                     </div>
+                                </div>
                             )
                         })
                     }

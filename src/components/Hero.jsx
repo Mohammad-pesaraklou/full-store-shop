@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import backPic from '../Assets/storePic.jpg'
@@ -6,15 +6,22 @@ import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
+// icons
 import IconButton from '@mui/material/IconButton';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineAccountCircle } from 'react-icons/md'
+import { MdOutlineAssignmentInd } from 'react-icons/md'
 import { MdOutlineLocalGroceryStore } from 'react-icons/md'
 import { FcAbout } from 'react-icons/fc'
+import { BiLogOut } from 'react-icons/bi'
+import { VscSignIn } from 'react-icons/vsc'
+
 //styles
 import styles from '../styles/Hero.module.css'
+// context
+import { authContext } from '../context/AuthContextProvider';
 
 
 const Hero = () => {
@@ -23,6 +30,7 @@ const Hero = () => {
     const [open, setOpen] = useState();
 
     const drawerWidth = 240;
+    const { user, logOut } = useContext(authContext)
 
     const handler = () => {
         setToggle(!toggle)
@@ -30,17 +38,23 @@ const Hero = () => {
     const OpenHandler = () => {
         setToggle(!open)
     }
-
-
+    const logoutHandler = async () => {
+        try {
+            await logOut()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    console.log(user);
 
 
     return (
         <Container>
             <div className={styles.container}>
                 <div className={styles.container}>
-                    <Typography sx={{fontSize:{xs: '20px',sm: '25px',lg:'32px'}}} fontFamily={'Montserrat'}>
+                    <Typography sx={{ fontSize: { xs: '20px', sm: '25px', lg: '32px' } }} fontFamily={'Montserrat'}>
                         <Link className={styles.navText} to='/'>
-                            Online store
+                            Online shop
                         </Link>
                     </Typography>
                 </div>
@@ -55,12 +69,30 @@ const Hero = () => {
                         <Link className={styles.linkList} to={'/about'}>
                             <li className={styles.listChild}>About</li>
                         </Link>
-                        <Link className={styles.linkList} to={'/signUp'}>
-                            <li className={styles.signItem}>Sign Up</li>
-                        </Link>
+                        <div>
+                            {
+                                user?.email ?
+                                    <div className={styles.btnContainer}>
+                                        <Link className={styles.linkList} to={'/account'}>
+                                            <li className={styles.signInItem}>Account</li>
+                                        </Link>
+                                        <li className={styles.signItem} onClick={logoutHandler}>Log out</li>
+                                    </div>
+                                    :
+                                    <div className={styles.btnContainer}>
+                                        <Link className={styles.linkList} to={'/signIn'}>
+                                            <li className={styles.signInItem}>Sign In</li>
+                                        </Link>
+                                        <Link className={styles.linkList} to={'/signUp'}>
+                                            <li className={styles.signItem}>Sign Up</li>
+                                        </Link>
+                                    </div>
+                            }
+                        </div>
                     </ul>
 
                 </div>
+
                 <Box>
                     <GiHamburgerMenu
                         color="inherit"
@@ -97,10 +129,38 @@ const Hero = () => {
                                 <AiOutlineHome fontSize='22px' />
                                 <li className={styles.itemMenu}>Home</li>
                             </Link>
-                            <Link className={styles.hMenuLi} to="/account">
-                                <MdOutlineAccountCircle fontSize='22px' />
-                                <li className={styles.itemMenu}>Account</li>
-                            </Link>
+                            <div >
+                                {
+                                    user?.email ?
+                                        <div className={styles.btnHamContainer}>
+                                            <div style={{ display: 'flex', alignItems: 'center', }}>
+                                                <Link className={styles.hMenuLi} to={'/account'}>
+                                                    <MdOutlineAccountCircle />
+                                                    <li className={styles.itemMenu}>Account</li>
+                                                </Link>
+                                            </div>
+                                            <div className={styles.hMenuLi} style={{ cursor: 'pointer' }}>
+                                                <BiLogOut />
+                                                <li className={styles.itemMenu} onClick={logoutHandler}>Log out</li>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className={styles.btnHamContainer}>
+                                            <div>
+                                                <Link className={styles.hMenuLi} to={'/signIn'}>
+                                                    <VscSignIn />
+                                                    <li className={styles.itemMenu}>Sign In</li>
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <Link className={styles.hMenuLi} to={'/signUp'}>
+                                                    <MdOutlineAssignmentInd />
+                                                    <li className={styles.itemMenu}>Sign Up</li>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                }
+                            </div>
                             <Link className={styles.hMenuLi} to="/products">
                                 <MdOutlineLocalGroceryStore fontSize='22px' />
                                 <li className={styles.itemMenu}>Products</li>
@@ -129,8 +189,8 @@ const Hero = () => {
                         <Button variant='contained' sx={{ mt: 4, fontFamily: 'Montserrat' }}>Go To Products!</Button>
                     </Link>
                 </div>
-            </div>
-        </Container>
+            </div >
+        </Container >
     );
 };
 

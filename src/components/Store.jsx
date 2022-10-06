@@ -26,10 +26,12 @@ const Store = () => {
         <div>
             <Navbar />
             <Container>
-                <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
-                <Typography variant={'h4'} sx={{ display: 'flex', justifyContent: 'center', margin: '30px 0px', fontFamily: 'Montserrat' }}>
-                    Your Store Shop
-                </Typography>
+                <div style={{ display: 'flex', alignItems: 'center', margin: '40px 0px' }}>
+                    <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '60px', cursor: 'pointer' }} />
+                    <Typography variant={'h4'} sx={{ display: 'flex', justifyContent: 'center', margin: '0px auto', fontFamily: 'Montserrat' }}>
+                        Your Store Shop
+                    </Typography>
+                </div>
                 <TableContainer>
                     {
                         !items.selectedItems ? <LinearProgress sx={{ backgroundColor: "gold" }} /> : (
@@ -55,7 +57,7 @@ const Store = () => {
                                                 <TableRow
                                                     className='row'
                                                     key={item.id}
-                                                // onClick={() => navigate.push(`/coin/${inf.id}`)}
+                                                    sx={{ cursor: 'pointer' }}
                                                 >
                                                     <TableCell component="th"
                                                         scope='row'
@@ -71,6 +73,7 @@ const Store = () => {
                                                                 style={{
                                                                     marginBottom: "10px", cursor: "pointer"
                                                                 }}
+                                                                onClick={() => navigate(`/products/${item.id}`)}
                                                             />
                                                             <span style={{
                                                                 textTransform: "capitalize",
@@ -113,7 +116,7 @@ const Store = () => {
                         {
                             items.itemsCounter > 0 && <div className={styles.payment}>
                                 <p><span>Total Items:</span>{items.itemsCounter}</p>
-                                <p><span>Total payment:</span>{items.total}</p>
+                                <p><span>Total payment:</span>$ {items.total}</p>
                                 <div className={styles.buttonContainer}>
                                     <button className={styles.checkout} onClick={() => dispatch({ type: "CHECKOUT" })}>Check Out</button>
                                     <button className={styles.clear} onClick={() => dispatch({ type: "CLEAR" })}>Clear</button>
@@ -123,7 +126,7 @@ const Store = () => {
 
                         {
                             items.checkOut && <div className={styles.complete} >
-                                <img src={pic} alt='successfully'/>
+                                <img src={pic} alt='successfully' />
                                 <h3>Thank You For Your Purchase</h3>
                                 <Link to='/products' style={{ textDecoration: 'none', color: '#1a73e8', }}><Button variant='contained' sx={{ fontFamily: 'Montserrat', mt: 1 }}>Continue Shopping</Button></Link>
                             </div>

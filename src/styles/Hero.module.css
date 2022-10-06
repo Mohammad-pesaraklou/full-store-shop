@@ -33,7 +33,7 @@
   font-weight: 600;
 }
 .linkList {
-  color: rgb(24, 21, 21);
+  color: rgba(24, 21, 21, 0.783);
   text-decoration: none;
 }
 
@@ -101,7 +101,24 @@
   text-decoration: none;
   color: rgb(2, 2, 2);
 }
-
+/* .btnContainer {
+  display: flex;
+} */
+.signInItem {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 600;
+  background-color: white;
+  padding: 10px;
+  border-radius: 25px;
+  color: rgba(238, 17, 17, 0.805);
+}
+.signInItem:hover {
+  transform: scale(1.15);
+  transition: all 0.1s ease-in-out;
+  color: rgba(14, 15, 15, 0.726);
+}
 @media (min-width: 750px) {
   .burgerIcon {
     display: none;
