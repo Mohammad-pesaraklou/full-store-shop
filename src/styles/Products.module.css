@@ -7,6 +7,7 @@
   margin: 0 10px 50px;
   transition: all 0.2s ease;
   text-align: center;
+  position: relative;
 }
 .cont {
   border-radius: 10px;
@@ -22,7 +23,9 @@
   justify-content: center;
   align-items: center;
 }
-
+.title {
+  margin-top: 10px;
+}
 .container:hover {
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
     rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
@@ -62,7 +65,11 @@
   align-items: center;
   margin: 35px 20px 20px;
 }
-
+.details:hover {
+  transform: scale(1.10);
+  color: #151414;
+  transition: all .1s ease-in-out;
+}
 .linkContainer a {
   text-decoration: none;
   color: #1a73e8;
@@ -101,7 +108,37 @@
   font-weight: bold;
   line-height: 30px;
 }
-
+.price {
+  margin-top: 20px;
+  color: rgb(18, 130, 18);
+}
+.plus {
+  position: absolute;
+  left: 3%;
+  margin-top: 3px;
+  border: 2px solid #1a73e8;
+  font-size: 22px;
+  border-radius: 50%;
+  color: #1a73e8;
+}
+.plus:hover {
+  border: 2px solid #e81a1a;
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.15);
+}
+.mines {
+  position: absolute;
+  left: 3%;
+  margin-top: 3px;
+  font-size: 25px;
+  border-radius: 50%;
+  color: #1a73e8;
+}
+.mines:hover {
+  color: #e81a1a;
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.15);
+}
 .smallButton img {
   width: 20px;
 }

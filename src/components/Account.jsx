@@ -1,53 +1,53 @@
-import { Button, Container, Grid, LinearProgress, Typography } from '@mui/material';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import trashIcon from '../Assets/trash.svg';
+import React from 'react';
+import { Container, Grid, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+///function
 import { isInCart, quantityCount, shorten } from '../helper/functions';
-import { BiChevronLeft } from 'react-icons/bi'
-
 //styles
 import styles from '../styles/Products.module.css'
+// icons
+import { BiChevronLeft } from 'react-icons/bi';
+import { BsTrash } from 'react-icons/bs';
+import trashIcon from '../Assets/trash.svg';
+// components
 import Footer from './Footer';
 import Navbar from './Navbar';
+// actions
 import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
-import { useDispatch, useSelector } from 'react-redux';
-const SearchedItem = () => {
+import { addItemAccount, removeItemAccount } from '../Redux/Account/AccountAction';
 
+const Account = () => {
+
+    const dispatch = useDispatch();
+    const dataAccount = useSelector(state => state.AccountState)
     const items = useSelector(state => state.cartState)
-    const dispatch = useDispatch()
-    const [searchedItems, setSearchedItem] = useState([])
-    const params = useParams()
     const navigate = useNavigate()
 
-    const getProducts = (category) => {
-        axios.get(`https://fakestoreapi.com/products/category/${category}`)
-            .then(res => setSearchedItem(res.data))
-
-    }
-
-    useEffect(() => {
-        getProducts(params.search)
-
-    }, [])
-
-    if (!searchedItems.length) return navigate('/notfound')
+    console.log(dataAccount.selectedItems);
 
     return (
-        <>
+        <div>
             <Navbar />
             <Container>
-                <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
-                <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products<span style={{ color: '#e30c222' }}>({params.search})</span></Typography>
-                <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: "center" }} >
+                <div style={{ display: 'flex', alignItems: 'center', margin: '40px 0px' }}>
+                    <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '60px', cursor: 'pointer' }} />
+                    <Typography variant={'h4'} sx={{ display: 'flex', justifyContent: 'center', margin: '0px auto', fontFamily: 'Montserrat' }}>
+                        Your Saved Products
+                    </Typography>
+                </div>
+                <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
                     {
-                        searchedItems?.map(product => {
+                        dataAccount?.selectedItems.map(product => {
                             return (
-                                <div className={styles.container}>
+                                <div className={styles.container} key={product.id}>
                                     <img src={product.image} className={styles.cardImage} />
-                                    <h3>{shorten(product.title)}</h3>
-                                    <p>{product.price} $</p>
+                                    <div>
+                                        <BsTrash className={styles.mines} onClick={() => dispatch(removeItemAccount(product))} />
+                                        <h3 className={styles.title}>{shorten(product.title)}</h3>
+                                    </div>
+                                    <p className={styles.price}>$ {product.price}</p>
                                     <div className={styles.linkContainer}>
                                         <Link to={`/products/${product.id}`}>DetailsPage</Link>
                                         <div className={styles.buttonContainer}>
@@ -68,6 +68,7 @@ const SearchedItem = () => {
                                                     <button className={styles.smallButton} onClick={() => dispatch(increase(product))}>+</button> :
                                                     <button onClick={() => dispatch(addItem(product))}>ADD_ITEM</button>
                                             }
+
                                         </div>
                                     </div>
                                 </div>
@@ -75,11 +76,9 @@ const SearchedItem = () => {
                         })
                     }
                 </Grid>
-
             </Container>
-            <Footer />
-        </>
+        </div>
     );
 };
 
-export default SearchedItem;
+export default Account;

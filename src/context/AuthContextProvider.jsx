@@ -5,7 +5,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { setDoc, doc } from 'firebase/firestore';
 
 export const authContext = createContext()
 
@@ -15,6 +16,9 @@ const AuthContextProvider = ({ children }) => {
 
     const signUp = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
+        setDoc(doc(db, 'users', email), {
+            savedProduct: []
+        })
     }
     const signIn = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)

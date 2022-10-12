@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Container, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import backPic from '../Assets/storePic.jpg'
 import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
@@ -26,11 +26,21 @@ import { authContext } from '../context/AuthContextProvider';
 
 const Hero = () => {
 
+    const { user, logOut } = useContext(authContext)
     const [toggle, setToggle] = useState();
     const [open, setOpen] = useState();
+    const navigate = useNavigate()
 
     const drawerWidth = 240;
-    const { user, logOut } = useContext(authContext)
+
+    const touchHandler = () => {
+        if (user === null) {
+            navigate('/signup')
+        } else {
+            navigate('/products')
+        }
+    }
+
 
     const handler = () => {
         setToggle(!toggle)
@@ -63,9 +73,7 @@ const Hero = () => {
                         <Link className={styles.linkList} to={'/'}>
                             <li className={styles.listChild}>Home</li>
                         </Link>
-                        <Link className={styles.linkList} to={'/products'}>
-                            <li className={styles.listChild}>Product</li>
-                        </Link>
+                        <li className={styles.listChild} onClick={touchHandler}>Product</li>
                         <Link className={styles.linkList} to={'/about'}>
                             <li className={styles.listChild}>About</li>
                         </Link>
@@ -186,7 +194,7 @@ const Hero = () => {
                         - online shop
                     </Typography>
                     <Link className={styles.btnLink} to={'/products'}>
-                        <Button variant='contained' sx={{ mt: 4, fontFamily: 'Montserrat' }}>Go To Products!</Button>
+                        <Button variant='contained' sx={{ mt: 4, fontFamily: 'Montserrat' }} onClick={touchHandler}>Go To Products!</Button>
                     </Link>
                 </div>
             </div >

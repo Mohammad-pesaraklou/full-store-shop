@@ -6,7 +6,7 @@
   position: relative;
   width: 50px;
   height: 50px;
-  border: 2px solid white;
+  border: 2px solid #dfdedc;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
@@ -15,7 +15,7 @@
   position: absolute;
   bottom: 0%;
   left: -10%;
-  background: white;
+  background: #f8f9f7;
   color: black;
   border-radius: 50%;
   width: 25px;
@@ -24,16 +24,164 @@
   justify-content: center;
   align-items: center;
 }
-.navLink {
-  display: flex;
+.basketCont:hover{
+  border: 2px solid #eebc1d;
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.15);
 }
-.navList {
-  display: flex;
-}
+
 .navListItem {
   list-style-type: none;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid #818080;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 300;
 }
-.btnHamCont{
+.navListItem:hover {
+  transform: scale(1.15);
+  transition: all 0.1s ease-in-out;
+  color: #eebc1d;
+}
+.btnContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.linkList {
+  text-decoration: none;
+}
+.rush {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+/* Hamburger Menu */
+.basketCont2 {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #353535ca;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.basketSpan {
+  position: absolute;
+  bottom: 0%;
+  left: -10%;
+  background: #eebc1d;
+  color: rgb(7, 6, 6);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.burgerIcon {
+  display: block;
+  position: absolute;
+  right: 4%;
+  top: 20%;
+  z-index: 100;
+  cursor: pointer;
+}
+.menuList {
+  margin-top: 20px;
+  margin-left: 17px;
+  list-style-type: none;
+}
+.itemMenu {
+  font-weight: 500;
+  font-family: "Montserrat";
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+.hMenuLi {
+  text-decoration: none;
+  margin-bottom: 25px;
+  color: #0b0a0a;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.mainCont {
+  position: absolute;
+  top: 0%;
+  z-index: 90;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+.navText {
+  position: absolute;
+  left: 3%;
+  top: 2%;
+  text-decoration: none;
+  color: rgb(2, 2, 2);
+}
+.btnContainer {
+  display: flex;
+}
+.signInItem {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 600;
+  background-color: white;
+  padding: 10px;
+  border-radius: 25px;
+  color: rgba(238, 17, 17, 0.805);
+}
+.signInItem:hover {
+  transform: scale(1.15);
+  transition: all 0.1s ease-in-out;
+  color: rgba(14, 15, 15, 0.726);
+}
+@media (min-width: 750px) {
+  .burgerIcon {
+    display: none;
+  }
+  .listContainer {
+    display: flex;
+  }
+}
+@media (min-width: 1000px) {
+  .listChild {
+    font-size: 21px;
+  }
+  .linkList:last-child {
+    font-size: 22px;
+  }
+  .backText {
+    position: absolute;
+    top: 30%;
+    left: 7.5%;
+  }
+}
+@media (min-width: 1200px) {
+  .listChild {
+    font-size: 25px;
+  }
+  .linkList:last-child {
+    font-size: 27px;
+  }
+}
+@media (max-width: 750px) {
+  .navLink {
+    display: none;
+  }
+  .basketCont {
+    display: none;
+  }
 }

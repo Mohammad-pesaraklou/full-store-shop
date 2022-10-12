@@ -15,6 +15,7 @@ import Store from "./components/Store";
 import AuthContextProvider from "./context/AuthContextProvider";
 import SignUp from "./Authintication/SignUp";
 import SignIn from "./Authintication/SignIn";
+import Account from "./components/Account";
 
 const theme = createTheme({
   palette: {
@@ -38,6 +39,7 @@ function App() {
           <Provider store={store}>
             <Routes>
               <Route path="/notfound" element={<NotFound />} />
+              <Route path="/account" element={<Account />} />
               <Route path="/store" element={<Store />} />
               <Route path="/signUp" element={<SignUp />} />
               <Route path="/signIn" element={<SignIn />} />

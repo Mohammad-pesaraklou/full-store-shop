@@ -30,7 +30,7 @@
   margin-right: 20px;
   cursor: pointer;
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 400;
 }
 .linkList {
   color: rgba(24, 21, 21, 0.783);
@@ -41,7 +41,7 @@
   margin-right: 20px;
   cursor: pointer;
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 500;
   background-color: rgba(238, 17, 17, 0.805);
   padding: 10px;
   border-radius: 25px;
@@ -62,7 +62,7 @@
   position: absolute;
   z-index: 100;
   right: 2%;
-  top: 0.5%;
+  top: 1%;
 }
 .menuList {
   margin-top: 20px;
@@ -75,6 +75,11 @@
   font-size: 18px;
   display: flex;
   align-items: center;
+}
+.itemMenu:hover {
+  border-bottom: 2px solid rgb(180, 41, 41);
+  padding-bottom: 3px;
+  transition: all 0.2s ease-in-out;
 }
 .hMenuLi {
   text-decoration: none;
@@ -100,15 +105,16 @@
   top: 2%;
   text-decoration: none;
   color: rgb(2, 2, 2);
+  font-weight: 500;
 }
-/* .btnContainer {
+.btnContainer {
   display: flex;
-} */
+}
 .signInItem {
   margin-right: 20px;
   cursor: pointer;
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 500;
   background-color: white;
   padding: 10px;
   border-radius: 25px;

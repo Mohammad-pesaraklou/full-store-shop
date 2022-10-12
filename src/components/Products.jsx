@@ -1,18 +1,23 @@
-import { Button, CircularProgress, Container, Grid, LinearProgress, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
+import { Button, CircularProgress, Container, Grid, LinearProgress, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchProduct } from '../Redux/Product/ProductAction';
+import { Link, useNavigate } from 'react-router-dom';
 ///function
 import { isInCart, quantityCount, shorten } from '../helper/functions';
 //styles
 import styles from '../styles/Products.module.css'
-import Search from './Search';
+// icons
 import { BiChevronLeft } from 'react-icons/bi';
-import { Link, useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
+import trashIcon from '../Assets/trash.svg';
+// components
 import Footer from './Footer';
 import Navbar from './Navbar';
+import Search from './Search';
+// actions
 import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
-import trashIcon from '../Assets/trash.svg';
+import { addItemAccount, removeItemAccount } from '../Redux/Account/AccountAction';
+import { fetchProduct } from '../Redux/Product/ProductAction';
 
 
 const Products = () => {
@@ -37,16 +42,19 @@ const Products = () => {
                 <Search />
                 <BiChevronLeft onClick={() => navigate(-1)} style={{ fontSize: '40px', marginTop: '30px', cursor: 'pointer' }} />
                 <Typography variant='h4' fontFamily={'Montserrat'} sx={{ margin: '45px 5px' }}>Products</Typography>
-                <Grid container sx={{pl: 4.4}}>
+                <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
                     {
                         data.products?.map(product => {
                             return (
                                 <div className={styles.container} key={product.id}>
                                     <img src={product.image} className={styles.cardImage} />
-                                    <h3>{shorten(product.title)}</h3>
-                                    <p>{product.price} $</p>
+                                    <div>
+                                        <AiOutlinePlus className={styles.plus} onClick={() => dispatch(addItemAccount(product))} />
+                                        <h3 className={styles.title}>{shorten(product.title)}</h3>
+                                    </div>
+                                    <p className={styles.price}>$ {product.price}</p>
                                     <div className={styles.linkContainer}>
-                                        <Link to={`/products/${product.id}`}>DetailsPage</Link>
+                                        <Link to={`/products/${product.id}`} className={styles.details}>DetailsPage</Link>
                                         <div className={styles.buttonContainer}>
                                             {quantityCount(items, product.id) === 1 &&
                                                 <button className={styles.smallButton} onClick={() => dispatch(removeItem(product))}><img src={trashIcon} alt="trash" /></button>
