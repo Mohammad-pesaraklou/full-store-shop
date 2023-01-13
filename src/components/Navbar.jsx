@@ -30,9 +30,8 @@ const Navbar = () => {
     const [open, setOpen] = useState();
     const drawerWidth = 240;
 
-    console.log(user);
 
-  
+
     const handler = () => {
         setToggle(!toggle)
     }

@@ -16,7 +16,6 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 // actions
 import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
-import { addItemAccount, removeItemAccount } from '../Redux/Account/AccountAction';
 
 const Account = () => {
 
@@ -25,7 +24,6 @@ const Account = () => {
     const items = useSelector(state => state.cartState)
     const navigate = useNavigate()
 
-    console.log(dataAccount.selectedItems);
 
     return (
         <div>
@@ -39,12 +37,12 @@ const Account = () => {
                 </div>
                 <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
                     {
-                        dataAccount?.selectedItems.map(product => {
+                        items?.selectedItems.map(product => {
                             return (
                                 <div className={styles.container} key={product.id}>
                                     <img src={product.image} className={styles.cardImage} />
                                     <div>
-                                        <BsTrash className={styles.mines} onClick={() => dispatch(removeItemAccount(product))} />
+                                        <BsTrash className={styles.mines} />
                                         <h3 className={styles.title}>{shorten(product.title)}</h3>
                                     </div>
                                     <p className={styles.price}>$ {product.price}</p>

@@ -16,7 +16,6 @@ import Navbar from './Navbar';
 import Search from './Search';
 // actions
 import { addItem, decrease, increase, removeItem } from '../Redux/cart/CartAction';
-import { addItemAccount, removeItemAccount } from '../Redux/Account/AccountAction';
 import { fetchProduct } from '../Redux/Product/ProductAction';
 
 
@@ -49,7 +48,7 @@ const Products = () => {
                                 <div className={styles.container} key={product.id}>
                                     <img src={product.image} className={styles.cardImage} />
                                     <div>
-                                        <AiOutlinePlus className={styles.plus} onClick={() => dispatch(addItemAccount(product))} />
+                                        <AiOutlinePlus className={styles.plus} />
                                         <h3 className={styles.title}>{shorten(product.title)}</h3>
                                     </div>
                                     <p className={styles.price}>$ {product.price}</p>

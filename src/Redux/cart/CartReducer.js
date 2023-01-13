@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   selectedItems: [],
   itemsCounter: 0,
   total: "",
