@@ -1,7 +1,7 @@
-import { Button, Container, Grid, LinearProgress, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import trashIcon from '../Assets/trash.svg';
 
 import { isInCart, quantityCount, shorten } from '../helper/functions';

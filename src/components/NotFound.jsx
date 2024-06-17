@@ -31,6 +31,7 @@ const NotFound = () => {
                         <Link to='/' style={{ textDecoration: 'none' }}>
                             <Button sx={{ mt: 3 }} variant='contained'>Back To Home</Button>
                         </Link>
+
                     </div>
                     <div className={styles.svgContainer}>
                         <img src={notfound} className={styles.notfoundSvg} alt="notfound" />
